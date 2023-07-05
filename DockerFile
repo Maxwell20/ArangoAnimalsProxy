@@ -1,0 +1,12 @@
+FROM httpd:2.4.55-alpine
+
+COPY ./public-html/ /usr/local/apache2/htdocs/
+COPY ./custom-httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY ./custom-httpd-ssl.conf /usr/local/apache2/conf/extra/httpd-ssl.conf
+
+COPY ./server.key /usr/local/apache2/conf/server.key
+COPY ./server.cer /usr/local/apache2/conf/server.cer
+COPY ./ca.cer /usr/local/apache2/conf/ca.cer
+COPY ./truststore.pem /usr/local/apache2/conf/truststore.pem
+EXPOSE 443
+EXPOSE 80

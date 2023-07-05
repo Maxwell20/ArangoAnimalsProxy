@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  rock-apache-proxy:
+    container_name: apache-proxy-cn
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: apache-proxy
+    hostname: localhostdomain.com
+    volumes:
+      - ./public-html/:/usr/local/apache2/htdocs/public-html
+      - ./custom-httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./custom-httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
+    
+      - ./server.key:/usr/local/apache2/conf/server.key
+      - ./server.cer:/usr/local/apache2/conf/server.cer
+      - ./ca.cer:/usr/local/apache2/conf/ca.cer  
+      - ./truststore.pem:/usr/local/apache2/conf/truststore.pem
+    ports:
+      - '80:80'  
+      - '443:443'
+
+
+  
+
+
+  
